@@ -1,9 +1,16 @@
 import React from "react";
 
+/**
+ * @render react
+ * @name Search
+ * @description functional component, it has input and button element and we using onClick event to call closure to the parent component
+ * <Search />
+ */
+
 const Search = (props) => (
     <form class="ui form">
         <div class="field">
-            <label>Search By Tag</label>
+            <label>Welcome to our Flickr App</label>
             <input
                 placeholder="Search By Tag..."
                 name="tag"

@@ -12,13 +12,17 @@ class App extends Component {
         super(props);
 
         this.state = {
-            results: [],
-            isLoading: false,
-            value: ""
+            results: []
         };
     }
+
+    /**
+     * @name componentWillUpdate
+     * @description when comopnent is mounted it will fetch data from the Flickr API at the url end-point of the top of this file
+     * @type {method}
+     */
+
     componentDidMount() {
-        debugger;
         fetch(url)
             .then(respose => {
                 if (respose.ok) {
@@ -36,37 +40,49 @@ class App extends Component {
             });
     }
 
+    /**
+     * @name handleOnChangeTag
+     * @description every type when we typing in the search our state.value is changed
+     * @type method
+     * @params event
+     * */
+
     handleOnChangeTag = ({ target: { value } }) => {
         this.setState({
             value
-        })
-    }   
+        });
+    };
 
-    handleSubmitTag = (e) => {
-        e.preventDefault();
+    /**
+     * @name handleSubmitTag
+     * @description when we press submit button we filter the results in state.results by the tag that we have already in state.tag
+     * @type method
+     * @params event
+     * */
+
+    handleSubmitTag = event => {
+        event.preventDefault();
         const { value } = this.state;
-        if(value.length > 0) {
+        if (value.length > 0) {
             this.setState({
-                results: this.state.results.filter(result => result.tags.includes(value))
-            })
+                results: this.state.results.filter(result =>
+                    result.tags.includes(value)
+                )
+            });
         } else {
             this.componentDidMount();
         }
-
-    }
+    };
 
     render() {
-        debugger;
-        const { isLoading, value, results } = this.state;
+        const { results } = this.state;
         return (
             <div className="ui container">
-                <Search 
+                <Search
                     handleOnChangeTag={this.handleOnChangeTag}
                     handleSubmitTag={this.handleSubmitTag}
                 />
-                <GridSystem 
-                    items={results} 
-                />
+                <GridSystem items={results} />
             </div>
         );
     }

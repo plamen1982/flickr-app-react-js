@@ -1,5 +1,12 @@
 import React from 'react';
 
+/**
+ * @render react
+ * @name GridSystem
+ * @description functional component, iterate and render Array of elements in a grid system
+ * <GridSystem />
+ */
+
 const GridSystem = (props) => (
     <div className="ui celled grid">
     <div className="row">
@@ -9,7 +16,7 @@ const GridSystem = (props) => (
           props.items.map(item => (
               <div className="three wide column">
                   <img
-                      alt="nice pic"
+                      alt="some pic"
                       src={item.media.m}
                       className="ui image"
                   />
