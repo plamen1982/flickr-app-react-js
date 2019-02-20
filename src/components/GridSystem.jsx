@@ -11,7 +11,7 @@ const GridSystem = (props) => (
     <div className="ui celled grid">
     <div className="row">
       {props.items.length === 0 ? (
-          <div>...Loading</div>
+          <div className="loading">...Loading</div>
       ) : (
           props.items.map((item, idx) => (
               <div className="three wide column" key={idx}>

@@ -1,13 +1,14 @@
 import React from "react";
-import Enzyme, { shallow, mount } from "enzyme";
+import Enzyme, { shallow } from "enzyme";
 import Adapter from "enzyme-adapter-react-16";
 import Search from "../Search";
-import sinon from "sinon";
+// import sinon from "sinon";
 
 Enzyme.configure({ adapter: new Adapter() });
 
 it("Search component", async () => {
     const search = shallow(<Search />);
+
     expect(search.find(".label").text()).toEqual("Welcome to our Flickr App!");
     expect(search.find(".input").length).toEqual(1);
     expect(search.find(".form").length).toEqual(1);
