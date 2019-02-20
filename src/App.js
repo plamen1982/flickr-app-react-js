@@ -19,31 +19,72 @@ class App extends Component {
 
     /**
      * @name componentWillUpdate
-     * @description when comopnent is mounted it will fetch data from the Flickr API at the url end-point of the top of this file
+     * @description when comopnent is mounted it will first fetch the data and then sorted by property that is from type Date string
      * @type {method}
      */
 
     componentDidMount() {
-        fetch(url)
+        this.fetchData(url).then(items => {
+            const sortedItems = this.sortArrayOfDatesByDateProp(items, 'date_taken');
+            this.setState({ results: sortedItems });
+        });
+    }
+
+    /**
+     * @name fetchData
+     * @description fetch the data from the provided url(end-point) and returned as Promise
+     * @type method
+     * @params url
+     * @returns {Promise}
+     * */
+
+    fetchData(url) {
+        return fetch(url)
             .then(respose => {
-                if (respose.ok) {
-                    return respose.json();
-                } else {
-                    console.log("response.ok is false, check your url(end-point)");
-                }
+                return this.errorResponseHandler(respose);
             })
             .then(data => {
                 const { items } = data;
-                debugger;
-                items.sort((a, b) => {
-                    return new Date(b.date_taken) - new Date(a.date_taken);
-                })
-                debugger
-                this.setState({ results: items });
+                return items;
             })
             .catch(e => {
                 console.log(e);
             });
+    }
+
+
+    /**
+     * @name sortArrayOfDatesByDateProp
+     * @description sort Array that has at least one property from type Date string, returns sorted Array
+     * @type method
+     * @params items
+     * @params prop
+     * @returns {Array}
+     * */
+
+    sortArrayOfDatesByDateProp(items, prop) {
+        return items.sort((a, b) => {
+            return new Date(b[prop]) - new Date(a[prop]);
+        });
+    }
+
+    /**
+     * @name errorResponseHandler
+     * @description It takes respose param that comming from the firts promise from the Fetch API, check if response.ok is truthy value, and returns the respose.json() if is ok
+     * @type method
+     * @params respose
+     * @params prop
+     * @returns {Array}
+     * */
+
+    errorResponseHandler(respose) {
+        if (respose.ok) {
+            return respose.json();
+        } else {
+            throw new Error(
+                "response.ok is false, check your end-point and required query params"
+            );
+        }
     }
 
     /**
