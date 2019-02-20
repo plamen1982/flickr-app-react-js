@@ -12,6 +12,7 @@
     "enzyme-adapter-react-16": "^1.9.1",
     "react-addons-test-utils": "^15.6.2",
     "react-scripts": "2.1.5",
+    "react-test-renderer": "^16.8.2",
     "react-testing-library": "^5.9.0",
     "sinon": "^7.2.4"
   },

@@ -72,7 +72,7 @@ class App extends Component {
         if (value.length > 0) {
             this.setState({
                 results: this.state.results.filter(result =>
-                    result.tags.includes(value)
+                    result.tags.toLowerCase().includes(value.toLowerCase())
                 )
             });
         } else {

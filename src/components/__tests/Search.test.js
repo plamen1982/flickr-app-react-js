@@ -6,12 +6,14 @@ import Search from "../Search";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-it("Search component", async () => {
-    const search = shallow(<Search />);
-
-    expect(search.find(".label").text()).toEqual("Welcome to our Flickr App!");
-    expect(search.find(".input").length).toEqual(1);
-    expect(search.find(".form").length).toEqual(1);
-    expect(search.find(".field").length).toEqual(1);
-    expect(search.find(".button").length).toEqual(1);
+describe('<Search /> component', () => {
+    it("Search component", async () => {
+        const search = shallow(<Search />);
+    
+        expect(search.find(".label").text()).toEqual("Welcome to our Flickr App!");
+        expect(search.find(".input").length).toEqual(1);
+        expect(search.find(".form").length).toEqual(1);
+        expect(search.find(".field").length).toEqual(1);
+        expect(search.find(".button").length).toEqual(1);
+    });
 });
