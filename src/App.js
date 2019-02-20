@@ -12,7 +12,8 @@ class App extends Component {
         super(props);
 
         this.state = {
-            results: []
+            results: [],
+            value: ""
         };
     }
 
@@ -33,6 +34,11 @@ class App extends Component {
             })
             .then(data => {
                 const { items } = data;
+                debugger;
+                items.sort((a, b) => {
+                    return new Date(b.date_taken) - new Date(a.date_taken);
+                })
+                debugger
                 this.setState({ results: items });
             })
             .catch(e => {
@@ -42,7 +48,7 @@ class App extends Component {
 
     /**
      * @name handleOnChangeTag
-     * @description every type when we typing in the search our state.value is changed
+     * @description called every time when we typing in the search and our state.value is changed with the typing
      * @type method
      * @params event
      * */

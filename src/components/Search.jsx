@@ -8,16 +8,16 @@ import React from "react";
  */
 
 const Search = (props) => (
-    <form class="ui form">
-        <div class="field">
-            <label>Welcome to our Flickr App</label>
+    <form className="ui form">
+        <div className="field">
+            <label>Welcome to our Flickr App!</label>
             <input
                 placeholder="Search By Tag..."
                 name="tag"
                 onChange={props.handleOnChangeTag}
             />
         </div>
-        <button type="submit" class="ui button" onClick={props.handleSubmitTag}>
+        <button type="submit" className="ui button" onClick={props.handleSubmitTag}>
             Search
         </button>
     </form>

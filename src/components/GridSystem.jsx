@@ -13,8 +13,8 @@ const GridSystem = (props) => (
       {props.items.length === 0 ? (
           <div>...Loading</div>
       ) : (
-          props.items.map(item => (
-              <div className="three wide column">
+          props.items.map((item, idx) => (
+              <div className="three wide column" key={idx}>
                   <img
                       alt="some pic"
                       src={item.media.m}
