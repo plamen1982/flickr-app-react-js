@@ -10,8 +10,11 @@ import React from "react";
 const Search = (props) => (
     <form className="ui form">
         <div className="field">
-            <label>Welcome to our Flickr App!</label>
+            <label
+                className="label"
+                >Welcome to our Flickr App!</label>
             <input
+                className = 'input'
                 placeholder="Search By Tag..."
                 name="tag"
                 onChange={props.handleOnChangeTag}

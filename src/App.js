@@ -29,7 +29,7 @@ class App extends Component {
                 if (respose.ok) {
                     return respose.json();
                 } else {
-                    console.log("something whent wrong");
+                    console.log("response.ok is false, check your url(end-point)");
                 }
             })
             .then(data => {
