@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+
 import "./App.css";
-import ThreeColumnGridSystem  from './components/ThreeColumnGridSystem';
+import ThreeColumnGridSystem from "./components/ThreeColumnGridSystem";
 
 const url =
     "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1";
@@ -10,10 +11,13 @@ class App extends Component {
         super(props);
 
         this.state = {
-            items: []
+            results: [],
+            isLoading: false,
+            value: ""
         };
     }
     componentDidMount() {
+        debugger;
         fetch(url)
             .then(respose => {
                 if (respose.ok) {
@@ -24,16 +28,48 @@ class App extends Component {
             })
             .then(data => {
                 const { items } = data;
-                this.setState({ items });
+                this.setState({ results: items });
             })
             .catch(e => {
                 console.log(e);
             });
     }
+
+    handleOnChangeTag = ({ target: { value } }) => {
+        this.setState({
+            value
+        })
+    }   
+
+    handleSubmitTag = (e) => {
+        e.preventDefault();
+        const { value } = this.state;
+        if(value.length > 0) {
+            this.setState({
+                results: this.state.results.filter(result => result.tags.includes(value))
+            })
+        } else {
+            this.componentDidMount();
+        }
+
+    }
+
     render() {
-        const { items } = this.state;
+        debugger;
+        const { isLoading, value, results } = this.state;
         return (
-            <ThreeColumnGridSystem items={items} />
+            <div className="ui container">
+                <form class="ui form">
+                    <div class="field">
+                        <label>Search By Tag</label>
+                        <input placeholder="Search By Tag..." name="tag" onChange={this.handleOnChangeTag}/>
+                    </div>
+                    <button type="submit" class="ui button" onClick={this.handleSubmitTag}>
+                        Search
+                    </button>
+                </form>
+                <ThreeColumnGridSystem items={results} />
+            </div>
         );
     }
 }

@@ -14,13 +14,13 @@ const ThreeColumnGridSystem = (props) => (
                       className="ui image"
                   />
                   <div className="content">
-                      <div className="header">{item.author}</div>
+                      <div className="header">Author: {item.author}</div>
                       <div className="meta">
-                          <span className="date">{item.date_taken}</span>
+                          <span className="date">Date Taken: {item.date_taken}</span>
                       </div>
                   </div>
                   <div className="extra content">
-                      <div className="ui tags"> {item.tags} </div>
+                      <div className="ui tags">Tags: {item.tags} </div>
                   </div>
               </div>
           ))
