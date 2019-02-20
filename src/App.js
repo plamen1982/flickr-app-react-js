@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-
 import "./App.css";
 import GridSystem from "./components/GridSystem";
 import Search from "./components/Search";
+import { fetchData, sortArrayOfDatesByDateProp } from './helpers/helpers';
 
-const url =
-    "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1";
+const url = "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1";
 
 class App extends Component {
     constructor(props) {
@@ -18,73 +17,17 @@ class App extends Component {
     }
 
     /**
-     * @name componentWillUpdate
-     * @description when comopnent is mounted it will first fetch the data and then sorted by property that is from type Date string
+     * @name componentDidMount
+     * @description when comopnent is mounted it will first fetch the data and then sorted by property that needs to be as Date string
      * @type {method}
      */
 
     componentDidMount() {
-        this.fetchData(url).then(items => {
-            const sortedItems = this.sortArrayOfDatesByDateProp(items, 'date_taken');
+        debugger;
+        fetchData(url).then(items => {
+            const sortedItems = sortArrayOfDatesByDateProp(items, 'date_taken');
             this.setState({ results: sortedItems });
         });
-    }
-
-    /**
-     * @name fetchData
-     * @description fetch the data from the provided url(end-point) and returned as Promise
-     * @type method
-     * @params url
-     * @returns {Promise}
-     * */
-
-    fetchData(url) {
-        return fetch(url)
-            .then(respose => {
-                return this.errorResponseHandler(respose);
-            })
-            .then(data => {
-                const { items } = data;
-                return items;
-            })
-            .catch(e => {
-                console.log(e);
-            });
-    }
-
-
-    /**
-     * @name sortArrayOfDatesByDateProp
-     * @description sort Array that has at least one property from type Date string, returns sorted Array
-     * @type method
-     * @params items
-     * @params prop
-     * @returns {Array}
-     * */
-
-    sortArrayOfDatesByDateProp(items, prop) {
-        return items.sort((a, b) => {
-            return new Date(b[prop]) - new Date(a[prop]);
-        });
-    }
-
-    /**
-     * @name errorResponseHandler
-     * @description It takes respose param that comming from the firts promise from the Fetch API, check if response.ok is truthy value, and returns the respose.json() if is ok
-     * @type method
-     * @params respose
-     * @params prop
-     * @returns {Array}
-     * */
-
-    errorResponseHandler(respose) {
-        if (respose.ok) {
-            return respose.json();
-        } else {
-            throw new Error(
-                "response.ok is false, check your end-point and required query params"
-            );
-        }
     }
 
     /**
