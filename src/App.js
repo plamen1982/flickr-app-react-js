@@ -25,6 +25,7 @@ class App extends Component {
     componentDidMount() {
         debugger;
         fetchData(url).then(items => {
+            debugger;
             const sortedItems = sortArrayOfDatesByDateProp(items, 'date_taken');
             this.setState({ results: sortedItems });
         });

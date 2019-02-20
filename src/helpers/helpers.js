@@ -25,7 +25,7 @@ const sortArrayOfDatesByDateProp = (items, prop) => {
 
 const errorResponseHandler = (respose) => {
     if (respose.ok) {
-        return JSON.stringify(respose);
+        return respose.json();
     } else {
         throw new Error(
             "response.ok is false, check your end-point and required query params"
@@ -44,6 +44,7 @@ const errorResponseHandler = (respose) => {
  function fetchData (url) {
     return fetch(url)
         .then(respose => {
+            debugger
             return errorResponseHandler(respose);
         })
         .then(data => {
