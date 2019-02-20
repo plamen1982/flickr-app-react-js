@@ -25,7 +25,7 @@ const sortArrayOfDatesByDateProp = (items, prop) => {
 
 const errorResponseHandler = (respose) => {
     if (respose.ok) {
-        return respose.json();
+        return JSON.stringify(respose);
     } else {
         throw new Error(
             "response.ok is false, check your end-point and required query params"
