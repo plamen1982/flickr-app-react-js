@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ThreeColumnGridSystem = (props) => (
+const GridSystem = (props) => (
     <div className="ui celled grid">
     <div className="row">
       {props.items.length === 0 ? (
@@ -29,4 +29,4 @@ const ThreeColumnGridSystem = (props) => (
   </div>
 );
 
-export default ThreeColumnGridSystem;
+export default GridSystem;

@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 
 import "./App.css";
-import ThreeColumnGridSystem from "./components/ThreeColumnGridSystem";
+import GridSystem from "./components/GridSystem";
+import Search from "./components/Search";
 
 const url =
     "https://api.flickr.com/services/feeds/photos_public.gne?format=json&nojsoncallback=1";
@@ -59,16 +60,13 @@ class App extends Component {
         const { isLoading, value, results } = this.state;
         return (
             <div className="ui container">
-                <form class="ui form">
-                    <div class="field">
-                        <label>Search By Tag</label>
-                        <input placeholder="Search By Tag..." name="tag" onChange={this.handleOnChangeTag}/>
-                    </div>
-                    <button type="submit" class="ui button" onClick={this.handleSubmitTag}>
-                        Search
-                    </button>
-                </form>
-                <ThreeColumnGridSystem items={results} />
+                <Search 
+                    handleOnChangeTag={this.handleOnChangeTag}
+                    handleSubmitTag={this.handleSubmitTag}
+                />
+                <GridSystem 
+                    items={results} 
+                />
             </div>
         );
     }
